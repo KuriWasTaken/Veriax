@@ -89,7 +89,7 @@ Coffe.BorderSizePixel = 2
 Coffe.Position = UDim2.new(0.705340624, 0, 0.8046875, 0)
 Coffe.Size = UDim2.new(0, 164, 0, 50)
 Coffe.Font = Enum.Font.SourceSans
-Coffe.Text = "Buy me a cup of coffe"
+Coffe.Text = "Discord"
 Coffe.TextColor3 = Color3.fromRGB(255, 0, 127)
 Coffe.TextScaled = true
 Coffe.TextSize = 14.000
@@ -158,9 +158,11 @@ local function LNJHY_fake_script() -- Load.LocalScript
 		if sure == false then
 			sure = true
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
+			script.Parent.Parent.Parent:Destroy()
 		end
-		if currentVersion == game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/CurrentVersion") then
+		if string.find(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/CurrentVersion"), currentVersion) then
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
+			script.Parent.Parent.Parent:Destroy()
 		else
 			script.Parent.Parent.Notification.Visible = true
 			script.Parent.Parent.Notification.Text = "You are about to load an old version of Veriax, press Load again if you wan't to load the old version!"
@@ -183,13 +185,13 @@ local function WQHAHNP_fake_script() -- Github.LocalScript
 	end)
 end
 coroutine.wrap(WQHAHNP_fake_script)()
-local function QHVCO_fake_script() -- Coffe.LocalScript 
+local function QHVCO_fake_script()
 	local script = Instance.new('LocalScript', Coffe)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Notification.Visible = true
 		script.Parent.Parent.Notification.Text = "Copied link to clipboard!"
-		setclipboard("https://github.com/KuriWasTaken/Veriax")
+		setclipboard("https://github.com/KuriWasTaken/Veriax") --Discord link
 		wait(2)
 		script.Parent.Parent.Notification.Visible = false
 	end)
