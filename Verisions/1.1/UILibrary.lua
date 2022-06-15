@@ -1,6 +1,5 @@
 local UiLib = Instance.new("ScreenGui")
 local Docker = Instance.new("Frame")
-local UIListLayout = Instance.new("UIListLayout")
 
 
 UiLib.Name = "UiLib"
@@ -14,6 +13,8 @@ Docker.BackgroundTransparency = 1.000
 Docker.Position = UDim2.new(0.00309023494, 0, 0.0151306745, 0)
 Docker.Size = UDim2.new(0, 1899, 0, 100)
 
+local windowOffset = 0
+
 local Library = {}
 
 function Library:createTab(Name)
@@ -23,15 +24,18 @@ function Library:createTab(Name)
 	local Line = Instance.new("TextLabel")
 	local Body = Instance.new("Frame")
 	local size = Instance.new("NumberValue")
+	local UIListLayout = Instance.new("UIListLayout")
 	
 	size.Name = "size"
 	size.Parent = Body
-	
+
 	Tab.Name = "Tab"
 	Tab.Parent = Docker
 	Tab.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 	Tab.Size = UDim2.new(0, 204, 0, 39)
-
+	Tab.Position = UDim2.new(windowOffset, 0, 0, 0)
+	windowOffset += 0.15
+	
 	Body.Name = "Body"
 	Body.Parent = Tab
 	Body.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -41,7 +45,7 @@ function Library:createTab(Name)
 	UIListLayout.Parent = Body
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout.Padding = UDim.new(0, 3)
-	
+
 	Title_2.Name = "Title"
 	Title_2.Parent = Tab
 	Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -55,7 +59,7 @@ function Library:createTab(Name)
 	Title_2.TextSize = 14.000
 	Title_2.TextWrapped = true
 	Title_2.TextXAlignment = Enum.TextXAlignment.Left
-	
+
 	Open.Name = "Open"
 	Open.Parent = Tab
 	Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -82,11 +86,13 @@ function Library:createTab(Name)
 	Line.Text = ""
 	Line.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Line.TextSize = 14.000
-	
-	
+
+
 	local function YIAGR_fake_script() -- Body.LocalScript 
 		local script = Instance.new('LocalScript', Body)
+		script.Parent.Parent.Parent.Visible = false
 		wait(2)
+		script.Parent.Parent.Parent.Visible = true
 		for i,v in pairs(script.Parent:GetChildren()) do
 			if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") or v:IsA("Frame") then
 				script.Parent.size.Value += 42
@@ -117,7 +123,6 @@ function Library:createTab(Name)
 
 		script.Parent.MouseButton1Click:Connect(function()
 			if opened == false then
-				opened = true
 				TweenService:Create(script.Parent, tweenInfo, {Rotation = -90}):Play()
 				script.Parent.Parent.Body:TweenSize(
 					UDim2.new(0, 204,0, script.Parent.Parent.Body.size.Value),
@@ -133,8 +138,8 @@ function Library:createTab(Name)
 						v.Visible = true
 					end
 				end
+				opened = true
 			else
-				opened = false
 				TweenService:Create(script.Parent, tweenInfo, {Rotation = 90}):Play()
 				script.Parent.Parent.Body:TweenSize(
 					UDim2.new(0,204,0,0),
@@ -149,6 +154,7 @@ function Library:createTab(Name)
 						v.Visible = false
 					end
 				end
+				opened = false
 			end
 		end)
 	end
@@ -160,11 +166,7 @@ function Library:createTab(Name)
 		script.Parent.Draggable = true
 	end
 	coroutine.wrap(DGIMBAE_fake_script)()
-	print("All Good")
-	
-	
-	
-	
+
 	local objs = {}
 	function objs:createButton(Name, callback)
 		local Button = Instance.new("TextButton")
@@ -183,7 +185,7 @@ function Library:createTab(Name)
 			callback()
 		end)
 	end
-	
+
 	function objs:createToggle(Name, callback)
 		local Toggle = Instance.new("Frame")
 		local Title = Instance.new("TextLabel")
@@ -207,6 +209,7 @@ function Library:createTab(Name)
 		Title.TextSize = 14.000
 		Title.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 		Title.TextWrapped = true
+		Title.Text = Name
 
 		ToggleButton.Name = "ToggleButton"
 		ToggleButton.Parent = Toggle
@@ -221,9 +224,9 @@ function Library:createTab(Name)
 		ToggleButton.TextScaled = true
 		ToggleButton.TextSize = 14.000
 		ToggleButton.TextWrapped = true
-		
+
 		local toggled = false
-		
+
 		ToggleButton.MouseButton1Click:Connect(function()
 			toggled = not toggled
 			callback(toggled)
@@ -234,7 +237,7 @@ function Library:createTab(Name)
 			end
 		end)
 	end
-	
+
 	function objs:createLabel(Text)
 		local TextLabel = Instance.new("TextLabel")
 		TextLabel.Parent = Body
@@ -249,7 +252,7 @@ function Library:createTab(Name)
 		TextLabel.TextWrapped = true
 		TextLabel.Text = Text
 	end
-	
+
 	function objs:createSlider(Name, Max, callback)
 		local Slider = Instance.new("Frame")
 		local SliderSlider = Instance.new("Frame")
@@ -293,7 +296,7 @@ function Library:createTab(Name)
 		SliderTitle.TextSize = 14.000
 		SliderTitle.TextWrapped = true
 		SliderTitle.Text = Name
-		
+
 		local UserInputService = game:GetService("UserInputService")
 		local Dragging = false
 		Slider_2.MouseButton1Down:Connect(function()
@@ -301,7 +304,7 @@ function Library:createTab(Name)
 		end)
 
 		local sliderValue
-		
+
 		UserInputService.InputChanged:Connect(function()
 			if Dragging then
 				local MousePos = UserInputService:GetMouseLocation()+Vector2.new(0,36)
