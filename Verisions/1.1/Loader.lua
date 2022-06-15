@@ -157,10 +157,10 @@ local function LNJHY_fake_script() -- Load.LocalScript
 	script.Parent.MouseButton1Click:Connect(function()
 		if sure == false then
 			sure = true
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Loader.lua"))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
 		end
 		if currentVersion == game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/CurrentVersion") then
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Loader.lua"))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
 		else
 			script.Parent.Parent.Notification.Visible = true
 			script.Parent.Parent.Notification.Text = "You are about to load an old version of Veriax, press Load again if you wan't to load the old version!"
