@@ -161,8 +161,9 @@ if game.PlaceId == 606849621 then
 				script.Parent.Parent.Parent:Destroy()
 			end
 			if string.find(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/CurrentVersion"), currentVersion) then
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
 				script.Parent.Parent.Parent:Destroy()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
+				
 			else
 				script.Parent.Parent.Notification.Visible = true
 				script.Parent.Parent.Notification.Text = "You are about to load an old version of Veriax, press Load again if you wan't to load the old version!"
