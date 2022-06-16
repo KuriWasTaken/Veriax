@@ -157,12 +157,10 @@ if game.PlaceId == 606849621 then
 		script.Parent.MouseButton1Click:Connect(function()
 			if sure == false then
 				sure = true
-				script.Parent.Parent.Parent:Destroy()
 				script.Parent.Parent.Visible = false
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
 			end
 			if string.find(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/CurrentVersion"), currentVersion) then
-				script.Parent.Parent.Parent:Destroy()
 				script.Parent.Parent.Visible = false
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/" .. currentVersion .. "/Scripts/Jailbreak.lua"))()
 				
