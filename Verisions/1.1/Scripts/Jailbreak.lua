@@ -278,6 +278,19 @@ windows.MISC:createToggle("No Wait", function(a)
     end
 end)
 
+windows.MISC:createToggle("No Slow Falling", function(a)
+    function deadFunction() --Lazy solution
+        return false 
+    end    
+        
+    
+    if a then
+        require(game:GetService("ReplicatedStorage").Game.Paraglide).IsFlying = deadFunction()
+    else
+        require(game:GetService("ReplicatedStorage").Game.Paraglide).IsFlying = engine.Backups.IsFlying()
+    end
+end)
+
 windows.MISC:createToggle("Open All Doors loop", function(a)
     OpenDoors = a
 end)
