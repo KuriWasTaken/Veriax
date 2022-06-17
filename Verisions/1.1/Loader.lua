@@ -192,7 +192,7 @@ if game.PlaceId == 606849621 then
 		script.Parent.MouseButton1Click:Connect(function()
 			script.Parent.Parent.Notification.Visible = true
 			script.Parent.Parent.Notification.Text = "Copied link to clipboard!"
-			setclipboard("https://github.com/KuriWasTaken/Veriax") --Discord link
+			setclipboard("https://discord.gg/4JxcCNFj7n") --Discord link
 			wait(2)
 			script.Parent.Parent.Notification.Visible = false
 		end)
