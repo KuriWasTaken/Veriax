@@ -6,7 +6,7 @@ Veriax.Backups = {}
 Veriax.OtherValues = {}
 
 Veriax.OtherValues.Time = require(game:GetService("ReplicatedStorage").Resource.Settings).Time
-
+Veroax.Backups.IsFlying = require(game:GetService("ReplicatedStorage").Game.Paraglide).IsFlying
 
 for i, v in pairs(getgc(true)) do
     if type(v) == "table" then
