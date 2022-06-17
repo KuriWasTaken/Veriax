@@ -310,7 +310,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
         engine.GetVehiclePacket().TirePopDuration = 0
     end
 end)
-
+require(game:GetService("ReplicatedStorage").Game.Notification).new({
+            Text = "Veriax loaded sucessfully!",
+            Duration = 3
+})
 while wait(3) do
     if OpenDoors == true then
         for i,v in next, engine.Doors do 
