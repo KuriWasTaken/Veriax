@@ -1,7 +1,10 @@
 if not game:IsLoaded() then
     game.Loaded:wait()
 end
-
+require(game:GetService("ReplicatedStorage").Game.Notification).new({
+            Text = "Loading Veriax",
+            Duration = 2
+})
 
 local engine = loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/1.1/Scripts/Engine.lua"))()
 local UI = loadstring(game:HttpGet("https://raw.githubusercontent.com/KuriWasTaken/Veriax/main/Verisions/1.1/UILibrary.lua"))()
