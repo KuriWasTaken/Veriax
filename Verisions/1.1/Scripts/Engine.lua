@@ -1,12 +1,12 @@
---Cool engine script
-
 local Veriax = {}
 Veriax.Doors = {}
 Veriax.Backups = {}
 Veriax.OtherValues = {}
+Veriax.engineFunctions = {}
+
 
 Veriax.OtherValues.Time = require(game:GetService("ReplicatedStorage").Resource.Settings).Time
-Veriax.Backups.IsFlying = require(game:GetService("ReplicatedStorage").Game.Paraglide).IsFlying
+
 
 for i, v in pairs(getgc(true)) do
     if type(v) == "table" then
@@ -28,7 +28,7 @@ for i, v in pairs(getgc(true)) do
             elseif table.find(con, "Play") and table.find(con, "Source") and table.find(con, "FireServer") then
                 Veriax.PlaySound = v
             elseif table.find(con, "PlusCash") then
-                Veriax.AddCashScam = v
+                Veriax.PlusCash = v
             elseif table.find(con, "Punch") then
                 Veriax.GuiFunc = v
             end
@@ -47,5 +47,49 @@ gmt.__index = newcclosure(function(self, b)
     end 
     return oldIndex(self,b)
 end)
+
+function Veriax.engineFunctions.Teleport(position)
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetChildren()) do
+        if v:FindFirstChild("Seat") then
+            if v.Seat.PlayerName.Value == "" and v.Name == "Camaro" then
+                local dist = (v.PrimaryPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude
+                if dist <= 200 then
+                    if v:FindFirstChild("Passenger") then
+                        v.Passenger:Destroy()
+                    end
+                    local tween = game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(5), {CFrame = CFrame.new(v.PrimaryPart.Position.X, v.PrimaryPart.Position.Y, v.PrimaryPart.Position.Z)})
+                    tween:Play()
+                    tween.Completed:Wait()
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
+                    break
+                end
+            end
+        end
+    end
+    
+    
+    wait(1)
+    local CFrameEnd = position
+    local Time = 10 
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetChildren()) do
+        if v:FindFirstChild("Seat") then
+            if v.Seat.PlayerName.Value == game:GetService("Players").LocalPlayer.Name then
+                local StartTween =  game:GetService("TweenService"):Create(v.PrimaryPart, TweenInfo.new(2, Enum.EasingStyle.Linear), {CFrame = CFrame.new(v.PrimaryPart.Position.X, 200, v.PrimaryPart.Position.Z)})
+                StartTween:Play()
+                StartTween.Completed:Wait()
+                
+                local tween = game:GetService("TweenService"):Create(v.PrimaryPart, TweenInfo.new(Time, Enum.EasingStyle.Linear), {CFrame = CFrame.new(CFrameEnd.X, 200, CFrameEnd.Z)})
+                tween:Play()
+                tween.Completed:Wait()
+                
+                local FinalTween = game:GetService("TweenService"):Create(v.PrimaryPart, TweenInfo.new(2, Enum.EasingStyle.Linear), {CFrame = CFrame.new(CFrameEnd.X, CFrameEnd.Y-40, CFrameEnd.Z)})
+                FinalTween:Play()
+                FinalTween.Completed:Wait()
+                --game:GetService("Players").LocalPlayer.Humanoid:Jump()
+            end
+        end
+    end
+end
+
 
 return Veriax
