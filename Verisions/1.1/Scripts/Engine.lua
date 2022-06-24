@@ -48,7 +48,7 @@ gmt.__index = newcclosure(function(self, b)
     return oldIndex(self,b)
 end)
 
-function Veriax.engineFunctions.Teleport(position)
+Veriax.engineFunctions.Teleport = function(position)
     for i,v in pairs(game:GetService("Workspace").Vehicles:GetChildren()) do
         if v:FindFirstChild("Seat") then
             if v.Seat.PlayerName.Value == "" and v.Name == "Camaro" then
